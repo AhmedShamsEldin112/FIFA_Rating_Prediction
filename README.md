@@ -1,98 +1,149 @@
-FIFA Players Rating Analysis & Prediction (2015-2021)
-Project Overview
+⚽ FIFA Player Rating Prediction (2015–2021)
+📌 Project Overview
 
-This project analyzes FIFA player data from 2015 to 2021, tracks player rating progression, evaluates club performance trends, and builds a machine learning model to predict FIFA 21 player ratings. The analysis helps understand player development and can support scouting and recruitment decisions.
+This project focuses on predicting FIFA 21 player ratings based on historical player data from FIFA editions 2015–2020.
+Using data preprocessing, feature engineering, visualization, and machine learning models (Random Forest), the project analyzes player performance and estimates their future ratings.
 
-Dataset
+The workflow includes:
 
-Source: FIFA datasets (2015–2021)
+Data cleaning & transformation
 
-Format: CSV files for each FIFA year
+Exploratory data analysis (EDA) with visualizations
 
-Key Features:
+Feature engineering (e.g., BMI, potential increase)
 
-Player attributes: pace, shooting, passing, dribbling, defending, physic, age
+Machine Learning models for players and goalkeepers separately
 
-Goalkeeper attributes: gk_diving, gk_handling, gk_kicking, gk_reflexes, gk_speed, gk_positioning, age
+Evaluation using R² Score and RMSE
 
-Player information: sofifa_id, short_name, club_name, player_positions, potential, overall
+📂 Dataset
 
-Steps Performed
+The dataset was sourced from FIFA Player Data (2015–2021) provided on sofifa.com
+ (open-source Kaggle datasets).
 
-Data Loading and Cleaning
+Files used:
 
-Loaded datasets for FIFA15 to FIFA21.
+players_15.csv → FIFA 15
 
-Merged all datasets into a single DataFrame with consistent player IDs and FIFA version.
+players_16.csv → FIFA 16
 
-Removed unnecessary columns, handled missing values, calculated BMI and potential increase.
+players_17.csv → FIFA 17
 
-Exploratory Data Analysis (EDA)
+players_18.csv → FIFA 18
 
-Analyzed average overall rating per year.
+players_19.csv → FIFA 19
 
-Tracked top players such as Messi and Ronaldo across editions.
+players_20.csv → FIFA 20
 
-Visualized rating distributions and club performance trends.
+players_21.csv → FIFA 21 (for evaluation)
 
-Examined potential growth for players.
+Main features include:
 
-Machine Learning Modeling
+overall, potential, age, height_cm, weight_kg, pace, shooting, passing, dribbling, defending, physic, gk_diving, gk_reflexes, etc.
 
-Algorithm: Random Forest Regressor
+⚙️ Data Preprocessing & Feature Engineering
 
-Separate models were built for field players and goalkeepers.
+Removed irrelevant/unnecessary columns (URLs, tags, unused positions).
 
-Features were scaled using StandardScaler.
+Handled missing values by replacing with 0.
 
-Data split into training and testing sets (80/20) and model trained with 200 trees.
+Created new features:
 
-Evaluation metrics included R² and RMSE.
+BMI = weight_kg / (height_cm/100)^2
 
-Prediction and Evaluation
+Potential Increase = (potential - overall) / overall * 100
 
-Predicted FIFA 21 ratings for all known players.
+Averaged player stats across FIFA years.
 
-Achieved high accuracy:
+Separated players vs. goalkeepers for more accurate modeling.
 
-Field Players: R² = 0.95, RMSE ~1.72
+📊 Exploratory Data Analysis (EDA)
 
-Goalkeepers: R² = 0.92, RMSE ~2.15
+Some of the key insights & visualizations:
 
-Overall: R² ≈ 0.94, RMSE ~1.87
+📈 Average overall rating trend (2015 → 2020).
 
-Visualizations
+⭐ Progression of Messi & Cristiano Ronaldo ratings.
 
-Average overall ratings per year.
+📦 Distribution of overall ratings per FIFA version.
 
-Rating progression of selected players.
+🏟️ Top 4 clubs (average overall rating trend).
 
-Distribution of ratings per FIFA edition.
+⚖️ Distribution of BMI across positions.
 
-Top club performance trends.
+🤖 Machine Learning Models
 
-Average potential increase over the years.
+Algorithm used: Random Forest Regressor (n_estimators=200)
 
-(Plots generated using Matplotlib and Seaborn.)
+Data split: train_test_split (80% train, 20% test)
 
-Tools and Libraries
+Features:
 
-Python 3.x
+Players → [pace, shooting, passing, dribbling, defending, physic, age]
 
-Pandas and NumPy (data processing)
+Goalkeepers → [gk_diving, gk_handling, gk_kicking, gk_reflexes, gk_speed, gk_positioning, age]
 
-Matplotlib and Seaborn (visualization)
+✅ Evaluation Metrics:
 
-Scikit-learn (Random Forest, scaling, train/test split)
+Players Model:
 
-FPDF (PDF report generation)
+R² Score ≈ 0.713
+RMSE ≈ 3.392
 
-Key Insights
+Goalkeepers Model:
 
-Player ratings gradually evolve over the years, with top players maintaining high and stable ratings.
+R² Score ≈ 0.739
+RMSE ≈ 3.439
 
-Leading clubs consistently perform at a high level.
+Overall Model Performance (All Players):
 
-Random Forest model accurately predicts FIFA 21 ratings.
+R² Score = 0.9128
+RMSE = 1.8780
 
-The analysis can be useful for scouting and player recruitment.
+📌 Results & Insights
+
+The model successfully predicted FIFA 21 ratings using historical stats.
+
+Non-GK and GK models performed differently due to distinct skill sets.
+
+Visualizations show how players/clubs evolved over time.
+
+Potential feature (potential increase) gives insights into underrated/overperforming players.
+
+🚀 How to Run
+
+Clone the repo:
+
+git clone https://github.com/AhmedShamsEldin112/FIFA_Rating_Prediction.git
+cd FIFA_Rating_Prediction
+
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+
+Run the notebook:
+
+jupyter notebook FIFA_Rating_Prediction.ipynb
+
+📌 Tech Stack
+
+Python 3.9+
+
+Libraries: Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn
+
+✨ Future Improvements
+
+Add deep learning models (e.g., Neural Networks, LSTM).
+
+Include transfer value / wages as prediction features.
+
+Extend dataset to FIFA 22–23 for trend continuation.
+
+Build an interactive dashboard (Streamlit/Plotly) for better insights.
+
+👨‍💻 Author
+
+AhmedShamsEldin112
+🔗 GitHub Profile
